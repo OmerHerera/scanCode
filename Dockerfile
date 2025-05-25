@@ -16,8 +16,8 @@ COPY . .
 RUN pip install --no-cache-dir --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Set environment variable
-ENV PORT=8000
+# Set environment variable (Fly passes $PORT)
+ENV PORT=8080
 
-# Start app
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Start app (use env var PORT, or fallback to 8080)
+CMD ["sh", "-c", "uvicorn main:app --host 0.0.0.0 --port ${PORT:-8080}"]
