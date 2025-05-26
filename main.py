@@ -16,7 +16,7 @@ app = FastAPI()
 # Add this CORS middleware setup right after creating the app
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://byegluten.vercel.app", "https://9706cdfe-c489-4154-9e4b-b6216b773100.lovableproject.com"],  # update with your frontend URLs
+    allow_origins=["https://byegluten.vercel.app", "https://id-preview--9706cdfe-c489-4154-9e4b-b6216b773100.lovable.app"],  # update with your frontend URLs
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
