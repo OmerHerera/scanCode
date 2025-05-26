@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Query, File, UploadFile
 from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
 from pyzbar.pyzbar import decode
 from PIL import Image
 import io
@@ -11,6 +12,15 @@ from pydantic import BaseModel
 port = int(os.environ.get("PORT", 8000))
 
 app = FastAPI()
+
+# Add this CORS middleware setup right after creating the app
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["https://byegluten.vercel.app", "https://lovable.dev"],  # update with your frontend URLs
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/scan")
 async def scan_barcode_from_url(image_url: str = Query(..., description="URL of the image to scan")):
