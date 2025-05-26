@@ -3,3 +3,4 @@ uvicorn
 pyzbar
 Pillow
 httpx
+python-multipart
