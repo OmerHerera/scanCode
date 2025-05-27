@@ -10,18 +10,20 @@ import base64
 from pydantic import BaseModel
 
 port = int(os.environ.get("PORT", 8000))
+origins = os.getenv("CORS_ALLOW_ORIGINS", "").split(",")
 
 app = FastAPI()
 
 # Add this CORS middleware setup right after creating the app
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://byegluten.vercel.app", "https://id-preview--9706cdfe-c489-4154-9e4b-b6216b773100.lovable.app"],  # update with your frontend URLs
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
+print('origins', origins)
 @app.get("/scan")
 async def scan_barcode_from_url(image_url: str = Query(..., description="URL of the image to scan")):
     try:
